@@ -119,7 +119,7 @@ function getController(self,value){
 
 	//绑定this为_handler,如果controller是字符串，那么指定类方法到绑定的controller
 		value.controller.forEach((fn,index)=>{
-			
+			try{
 			//绑定this为_handler,如果controller是字符串，那么指定类方法到绑定的controller
 				if(toString.call(fn) === "[object String]"){
 						fn = self._handler[fn];
@@ -143,6 +143,12 @@ function getController(self,value){
 					fn = func_before(fn,before);
 				}
 				value.controller[index] = fn.bind(self._handler);
+
+				
+			}
+			catch(e){
+				throw new Error(e);
+			}
 		});
 }
 /**

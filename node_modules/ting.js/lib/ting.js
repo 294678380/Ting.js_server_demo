@@ -30,11 +30,18 @@ proto.init = function(app,routes,opt){
 			self.error("doc.path is undefined");
 			return false;
 		}
+		if(opt.doc.addFiles){
+			for(name in opt.doc.addFiles){
+				doc[name] = opt.doc.addFiles[name];
+			}
+			
+		}
 		if(Array.isArray(opt.doc.files)){
 			opt.doc.files.forEach(function(value){
 				doc[value](self._doc,opt);
 			});
 		}
+
 	}
 	return this._doc;
 }

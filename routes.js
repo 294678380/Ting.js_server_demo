@@ -33,7 +33,14 @@ module.exports = [
 						controller:["getPage"],
 						ver:{
 							query:{
-								s:/hello/
+								s:/hello/,
+								t:function(val,query){
+
+									if(val !== "test"){
+										return "参数t的值必须是test";
+									}
+									return true;
+								}
 							}
 						}
 					}

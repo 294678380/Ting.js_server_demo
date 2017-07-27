@@ -1,6 +1,6 @@
 {
   "name": "ting_server_demo",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "为Ting.js准备的server demo",
   "main": "index.js",
   "scripts": {
@@ -18,13 +18,14 @@
   "homepage": "https://github.com/294678380/Ting.js_server_demo#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "ting.js": "^1.1.2"
+    "ting.js": "^1.1.11"
   },
   "doc": {
     "path": "./doc/",
     "files": [
       "html",
-      "json"
+      "json",
+      "test"
     ]
   }
 }
