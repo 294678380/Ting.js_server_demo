@@ -18,7 +18,7 @@
   "homepage": "https://github.com/294678380/Ting.js_server_demo#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "ting.js": "^1.1.11"
+    "ting.js": "^1.1.16"
   },
   "doc": {
     "path": "./doc/",

@@ -9,6 +9,8 @@ var inter = exports = module.exports = {
 	验证请求对象上的object参数的正确性
 	@param parentObj {Object} 父级对象
 	@param rule {Object} 验证规则对象
+	@param obj_name {String} 验证对象名称
+	@param parentName {String} 验证对象父对象名称
 */
 inter.ver = function(parentObj,rule,obj_name,parentName){
 	let _err = {
@@ -22,35 +24,38 @@ inter.ver = function(parentObj,rule,obj_name,parentName){
 		if(!proto[name]){
 			_err.fieldName = parentName+"."+obj_name+"."+name;
 			_err.msg = _err.fieldName+" is undefined";
-			return parentObj._typeError = _err;
+			parentObj._typeError = _err
+			return;
 		}
+		let rule_type = toString.call(rule[name]);
 		//设置的正则验证
-		if(toString.call(rule[name]) === "[object RegExp]"){
+		if(rule_type === "[object RegExp]"){
 			let rex = rule[name];
 			let ed = rex.test(proto[name]);
 				if(!ed){
 					_err.fieldName = "req."+obj_name+"."+name;
 					_err.msg = _err.fieldName+" Validation failure";
-					return parentObj._typeError = _err;
+					parentObj._typeError = _err;
+					return;
 				}
 		}
 		//设置的函数验证 直接返回处理的结果
-		if(toString.call(rule[name]) === "[object Function]"){
+		if(rule_type === "[object Function]"){
 			let val = rule[name].call(parentObj,proto[name],proto);
 			if(val != true){
-
 				if(val === false){
-					return parentObj._typeError = true;
+					parentObj._typeError = true;
+					return;
 				}else{
-					return parentObj._typeError = val;
+					parentObj._typeError = val;
+					return;
 				}
 				
 			}
 		}
 
 	}
-
-	return parentObj._typeError = undefined;
+	parentObj._typeError = undefined;
 }
 /**
 	验证params的正确性
